@@ -19,6 +19,7 @@ for line in lines:
     historyURL = line[startIndex:endIndex]
     
 print(historyURL)
+#Gets my last url visted
 
 api = twitter.Api(creds[0],creds[1],creds[2],creds[3])
 statuses = api.GetUserTimeline(user)
@@ -34,15 +35,14 @@ cursor = console.cursor()
 cursor.execute("SELECT * FROM urls")
 
 title = cursor.execute("SELECT title FROM urls limit 1" )
-
-
-
+#Gets Title from my last url visted
 
 rows = cursor.fetchall()
 
 for row in rows:
     response = api.PostUpdate(row[0] + " is a Good Website url found here " + historyURL + " " + str(timestamp))
     print("Status updated to: " + response.text)
+    #My tweet output including Title & Url of my last visted page in google chrome
     
 console.close()
 
